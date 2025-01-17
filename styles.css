@@ -1,0 +1,213 @@
+body {
+    background-color: #fff;
+    color: #212529;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    margin-bottom: 10px;
+    text-align: left;
+    postive:relative;
+}
+ion-icon {
+  color: darkgrey;
+  text-decoration: none;
+  text-decoration:none;
+
+
+}
+.sql {
+  color: darkgrey;
+  text-decoration: none;
+  text-decoration:none;
+  margin-bottom: 19px;
+
+}
+img {
+  color: darkgrey;
+
+
+}
+
+#contact{
+
+padding: 10px;
+font-size:large;
+
+}
+
+
+#main {
+/*  margin-left:auto; margin-right:auto;
+  margin-bottom:auto; margin-top:auto;
+  position: fixed;
+  left: 47.4%;*/
+  text-align: center;
+  /*bottom: 50px;*/
+  /*margin: 0 auto;*/
+ /* width: 500px;
+  height: 200px;
+  border: 10px solid #2196F3;
+  background-color: #f7f7f7;
+*/
+
+}
+
+
+
+
+
+a {
+  color: #0060B6;
+  text-decoration: none;
+}
+
+a:hover {
+  color:#00A0C6;
+  text-decoration:none;
+  cursor:pointer;
+}
+
+#headers{
+  position: fixed;
+  bottom:710px;
+  left: 35%;
+  text-align: center;
+  margin: auto;
+  font-size: 30px;
+  justify-content: space-between;
+
+
+
+}
+
+
+#socials{
+  margin-left:auto; margin-right:auto;
+    position: fixed;
+    left: 46.4%;
+    bottom: 50px;
+    margin: 0 auto;
+    font-size: 50px;
+
+}
+#socials:hover{
+
+cursor:pointer
+
+
+}
+
+.NAME:hover span {
+    display:none;
+  }
+
+
+
+
+  .NAME:hover:before  {
+    font-weight: 900;
+    content: "Mihir Sai Kotamraju";
+    color:Black;
+  }
+
+  .HW:hover span {
+    display:none;
+  }
+
+
+
+
+  .HW:hover:before  {
+
+    content: "Hello World 🥰";
+
+  }
+
+.NAME{
+
+  margin-left:auto; margin-right:auto;
+  font-size: 4rem;
+
+}
+#liveAlertBtn{
+padding: 20px;
+}
+.cards{
+  margin-left:auto; margin-right:auto;
+
+
+}
+
+img{
+  max-width: 50%;
+  max-height: 50%;
+  margin-left:auto; margin-right:auto;
+
+  }
+
+.plug{
+
+  margin-left:35%;
+font-weight: 600;
+text-align: center;
+margin: auto;
+font-size: 30px;
+
+}
+
+.rectangle {
+  height: 500px;
+  width:1200px;
+  color:Mintcream;
+  background-color: rgb(40,40,40);
+  border-radius:7px;
+  display: flex;
+  justify-content:center;
+   margin-left:auto; margin-right:auto;
+   bottom: 300px;
+   font-weight: 800;
+   line-height: 1.5;
+   font-size: x-large;
+   box-sizing: border-box;
+   padding: 20px;
+   position: relative;
+   top: 110px;
+
+}
+.label{
+
+  color:Mintcream;
+  font-weight: 200;
+    font-family: "Monaco", " Lucida", monospace;
+;
+}
+.NAME{
+  margin-left:auto; margin-right:8px;
+color: black;
+box-sizing: border-box;
+
+
+
+}
+
+.HW{
+
+  color:lightgrey;
+  box-sizing: border-box;
+  padding: 0px;
+
+}
+.blink {
+  animation: blink 1.2s step-start 0s infinite;
+}
+@keyframes blink {
+  50% {
+    opacity: 0.0;
+  }
+}
+
+.card{
+padding: 10px;
+
+
+}
