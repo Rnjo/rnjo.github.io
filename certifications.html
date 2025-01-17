@@ -1,113 +1,90 @@
 <!doctype html>
 <html lang="en" data-bs-theme="dark">
   <head>
-
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="styles.css" rel="stylesheet">
 
-    <title> Mihir Kotamraju </title>
+    <title>GitHub Commit Counter</title>
     <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
-    <link rel=“shortcut icon” href=“/images/favicon.ico” type=“image/x-icon”>
-
-<style>
-
-button{
-color: white;
-
-}
-
-
-#carouselExampleDark{
-
-background-color:white;
-
-}
-
-</style>
-
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
+    <style>
+      body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        margin: 0;
+        font-family: Arial, sans-serif;
+      }
+
+      .counter-container {
+        text-align: center;
+        margin: 20px;
+      }
+
+      .counter {
+        font-size: 2em;
+        font-weight: bold;
+      }
+
+      .header {
+        font-size: 1.5em;
+        margin-bottom: 10px;
+      }
+    </style>
   </head>
 
-
-
   <body>
-    <p class="NAME" id="Header" style="text-align:center">  <span>Mihir Kotamraju  </span></p>
-
-    <h1 class="HW" id="Header" style="text-align:center">  <span>Hello World👋</span></h1>
-
-
-
-    <div id = "headers">
-              <a id="aa" href="/index.html">About Me</a>                    <a id="bb" href="/contact.html">Contact</a>                              <a id="cc" href="/education.html">Education</a>                    <a id="dd" href="/certifications.html">Fun Facts</a>
-      </div>
-<br>
-<br>
-<br>
-<br>
-
-<div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
-  <div class="carousel-inner">
-    <div class="carousel-item active" data-bs-interval="3500">
-      <img src="/images/Slide1.jpg" class="d-block w-100" alt="...">
-    </div>
-    <div class="carousel-item" data-bs-interval="3500">
-      <img src="/images/Slide2.jpg" class="d-block w-100" alt="...">
-    </div>
-    <div class="carousel-item" data-bs-interval="3500">
-      <img src="/images/Slide3.jpg" class="d-block w-100" alt="...">
-    </div>
-    <div class="carousel-item" data-bs-interval="3500">
-      <img src="/images/Slide4.jpg" class="d-block w-100" alt="...">
-    </div>
-    <div class="carousel-item" data-bs-interval="3500">
-      <img src="/images/Slide5.jpg" class="d-block w-100" alt="...">
-    </div>
-    <div class="carousel-item" data-bs-interval="3500">
-      <img src="/images/Slide6.jpg" class="d-block w-100" alt="...">
-    </div>
-    <div class="carousel-item" data-bs-interval="3500">
-      <img src="/images/Slide7.jpg" class="d-block w-100" alt="...">
-    </div>
-    <div class="carousel-item" data-bs-interval="3500">
-      <img src="/images/Slide8.jpg" class="d-block w-100" alt="...">
+    <div class="counter-container">
+      <div class="header">Total Commits by Rnjo</div>
+      <div id="commit-counter" class="counter">Loading...</div>
     </div>
 
-  </div>
-  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Previous</span>
-  </button>
-  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Next</span>
-  </button>
-</div>
+    <script>
+      async function fetchCommitCount() {
+        const username = "Rnjo";
+        const token = "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";
+        let totalCommits = 0;
 
-<div class="plug">
+        try {
+          // Fetch all repositories for the user
+          const reposResponse = await fetch(`https://api.github.com/user/repos`, {
+            headers: { Authorization: `token ${token}` }
+          });
+          const repos = await reposResponse.json();
 
-<strong> Check out our Youtube channel for more content <a href="https://www.youtube.com/@RMSYetis"> @RmsYetis </a></strong>
+          if (repos.message) {
+            throw new Error(repos.message); // Handle API errors
+          }
 
-</div>
+          // Loop through repositories and sum up commits
+          for (const repo of repos) {
+            const commitsResponse = await fetch(
+              `https://api.github.com/repos/${repo.owner.login}/${repo.name}/stats/contributors`,
+              { headers: { Authorization: `token ${token}` } }
+            );
+            const contributors = await commitsResponse.json();
 
+            // Find the user's commits in the repo
+            const userStats = contributors.find(contributor => contributor.author.login === username);
+            if (userStats) {
+              totalCommits += userStats.total;
+            }
+          }
 
+          // Display the total commits
+          document.getElementById("commit-counter").textContent = totalCommits.toLocaleString();
+        } catch (error) {
+          console.error("Error fetching commit count:", error);
+          document.getElementById("commit-counter").textContent = "Error loading data";
+        }
+      }
 
-  <div id = "socials">
-    <a href="https://www.linkedin.com/in/mihir-kotamraju-684200262/" style="text-decoration: none" target="_blank">      <ion-icon size="large" name="logo-linkedin" ></ion-icon>      </a>
+      fetchCommitCount();
+    </script>
 
-    <a target="_blank" href="mailto:kotamraju.mihir@gmail.com" style="text-decoration: none">    <ion-icon size = "large" name="mail-outline"></ion-icon> </a>
-    <a href="https://github.com/Rnjo/" target="_blank">  <ion-icon size="large" name="logo-github" ></ion-icon> </a>
-
-
-</div>
-
-
-
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
   </body>
 </html>
